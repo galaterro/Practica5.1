@@ -1,3 +1,6 @@
+import com.sun.org.apache.regexp.internal.RE;
+import jdk.internal.org.xml.sax.SAXException;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -21,7 +24,7 @@ public class Conexion {
         this.passwordBD="";
     }
 
-    public boolean EstablecerConexion() throws SQLException{
+    public boolean establecerConexion() throws SQLException{
         String url = "jdbc:ucanaccess://" + nombre_bd;
 
         try{
@@ -40,9 +43,15 @@ public class Conexion {
         }
         return true;
     }
-    public ResultSet EjecutarSentencia( String sql) throws SQLException{
+    public ResultSet ejecutarSentencia(String sql) throws SQLException{
         ResultSet rs;
         rs = this.sentencia.executeQuery(sql);
+        return rs;
+    }
+
+    public int ejecutarInsert(String sql) throws SQLException{
+        int rs;
+        rs = this.sentencia.executeUpdate(sql);
         return rs;
     }
 }
